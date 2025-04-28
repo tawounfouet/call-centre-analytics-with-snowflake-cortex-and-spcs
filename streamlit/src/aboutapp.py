@@ -4,7 +4,7 @@ import os
 
 def appinfo():
 
-    with open("./src/readme.md", 'r') as f:
+    with open("./readme.md", 'r') as f:
         readme_line = f.readlines()
         readme_buffer = []
         # resource_files

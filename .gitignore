@@ -2,3 +2,12 @@ connection_template.json
 docker_build_commands.txt
 localtesting.py
 audio2text/testwebservice.py
+
+
+.venv/
+connection.json
+
+__pycache__/
+*.pyc
+
+.ipynb_checkpoints

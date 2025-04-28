@@ -58,7 +58,7 @@ def get_login_token():
   with open("/snowflake/session/token", "r") as f:
     return f.read()
 
-def get_connection_params():
+def get_connection_params_v1():
 
   """
   Construct Snowflake connection params from environment variables. 
@@ -96,10 +96,58 @@ def get_connection_params():
 
 # connection_parameters = json.load(open('./src/connection.json'))
 
+def get_connection_params():
+    """
+    Construct Snowflake connection params from JSON file or fallback to default values.
+    """
+
+    # Try loading connection details from JSON file
+    connection_file = './src/connection.json'
+    if os.path.isfile(connection_file):
+        with open(connection_file, 'r') as file:
+            return json.load(file)
+    
+    # Fallback to hardcoded connection details
+    return {
+        "account": "ZQQHUZA-OJ27679",
+        "user": "AWFSNOWADMIN",
+        "password": "Thomson&20052014",
+        "passcode": "1170912",
+        "database": "LLMDemo",
+        "schema": "PUBLIC",
+        "warehouse": "small_warehouse",
+        "role": "SPCS_PSE_ROLE"
+    }
+
+# Get connection parameters
+connection_parameters = get_connection_params()
+
+
+def get_or_create_session():
+    """
+    Vérifie si une session existe déjà dans `st.session_state`. 
+    Si ce n'est pas le cas, elle est créée une seule fois.
+    """
+    if "snowpark_session" not in st.session_state:
+        st.session_state.snowpark_session = Session.builder.configs(get_connection_params()).create()
+    
+    return st.session_state.snowpark_session
+
+# ✅ Création unique de la session
+session = get_or_create_session()
+
+
+#connection_parameters = json.load(open('../connection.json'))
+#session = Session.builder.configs(connection_parameters).create()
+
+
+
     # session = 
 if "snowpark_session" not in st.session_state:
     # session = Session.builder.configs({"connection": get_connection_params()}).create()
-    session = Session.builder.configs(get_connection_params()).create()
+    #session = Session.builder.configs(get_connection_params()).create()
+    #session = st.session_state.snowpark_session
+    pass
 
     # session = Session.builder.configs(connection_parameters).create()
 else:
