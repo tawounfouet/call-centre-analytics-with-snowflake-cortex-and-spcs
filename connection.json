@@ -1,9 +1,9 @@
 {
-    "account": "ZQQHUZA-OJ27679",
-    "user": "AWFSNOWADMIN",
-    "password": "Thomson&20052014",
-    "passcode": "1211785",
-    "database": "LLMDemo",
+    "account": "",
+    "user": "",
+    "password": "",
+    "passcode": "",
+    "database": "",
     "schema": "PUBLIC",
     "warehouse": "small_warehouse",
     "role":"SPCS_PSE_ROLE"
